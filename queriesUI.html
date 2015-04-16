@@ -6,8 +6,70 @@
 </head>
 
 <body>
+<h3>
+Query 1: Get a list of the teams
+<form method="post" action="queries.php/?query=1">
+	<input type="submit" value="Get team names">
+</form> 
+</h3>
 
+<br><br>
 
+<h3>
+Query 2: Get the team a player played for in a specific year
+<form method="post" action="queries.php/?query=2">
+	<input id="firstName" name="firstName" value="" type="text" autocomplete="on" placeholder="First Name">
+	<input id="lastName" name="lastName" value="" type="text" autocomplete="on" placeholder="Last Name">
+	<input id="year" name="year" value="" type="text" autocomplete="on" placeholder="Year">
+	<input type="submit" value="What team did they play for?">
+</form> 
+</h3>
 
+<br><br>
+
+<h3>
+Query 3: Get basic player information
+<form method="post" action="queries.php/?query=3">
+	<input id="firstName" name="firstName" value="" type="text" autocomplete="on" placeholder="First Name">
+	<input id="lastName" name="lastName" value="" type="text" autocomplete="on" placeholder="Last Name">
+	<input type="submit" value="Get basic player information...">
+</form> 
+</h3>
+
+<br><br>
+
+<h3>
+Query 4: Get batting statistics for a player during a specific year
+<form method="post" action="queries.php/?query=4">
+	<input id="firstName" name="firstName" value="" type="text" autocomplete="on" placeholder="First Name">
+	<input id="lastName" name="lastName" value="" type="text" autocomplete="on" placeholder="Last Name">
+	<input id="year" name="year" value="" type="text" autocomplete="on" placeholder="Year">
+	<input type="submit" value="How did they do?">
+</form> 
+</h3>
+
+<br><br>
+
+<h3>
+Query 5: Get pitching statistics for a player during a specific year
+<form method="post" action="queries.php/?query=5">
+	<input id="firstName" name="firstName" value="" type="text" autocomplete="on" placeholder="First Name">
+	<input id="lastName" name="lastName" value="" type="text" autocomplete="on" placeholder="Last Name">
+	<input id="year" name="year" value="" type="text" autocomplete="on" placeholder="Year">
+	<input type="submit" value="How did they do?">
+</form> 
+</h3>
+
+<br><br>
+
+<h3>
+Query 4: Get fielding statistics for a player during a specific year
+<form method="post" action="queries.php/?query=6">
+	<input id="firstName" name="firstName" value="" type="text" autocomplete="on" placeholder="First Name">
+	<input id="lastName" name="lastName" value="" type="text" autocomplete="on" placeholder="Last Name">
+	<input id="year" name="year" value="" type="text" autocomplete="on" placeholder="Year">
+	<input type="submit" value="How did they do?">
+</form> 
+</h3>
 </body>
 </html>
