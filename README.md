@@ -12,7 +12,6 @@ Just to manage code changes etc.
 * statistics for given player by year for fielding
 * who managed a team in a given year
 * salary for given first/last name
-* basic info for given player/manager
 * school for given player
 * awards for given year
 * awards for given player
