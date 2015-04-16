@@ -5,8 +5,8 @@ Just to manage code changes etc.
 ## List of queries:
 
 * team names
-* players' basic info for given team
-* players' basic info for given position
+* team name for player & year
+* players' basic info for firstName, lastName
 * statistics for given player by year for batting
 * statistics for given player by year for pitching
 * statistics for given player by year for fielding
