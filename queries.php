@@ -51,7 +51,11 @@
 						AND yearID = '" . mysql_real_escape_string($_POST['year']) . "'");
 			break;
 		case 7:
-			executeQuery("SELECT playerID, teamID FROM managers");
+			executeQuery("SELECT nameFirst, nameLast FROM master
+						WHERE playerID = (SELECT DISTINCT playerID FROM managers
+										WHERE teamID = (SELECT DISTINCT teamID from teams
+														WHERE name = '" . mysql_real_escape_string($_POST['teamName']) . "')
+										AND yearID = " . mysql_real_escape_string($_POST['year']) . ")");
 			break;
 		case 8: //The same Query can be used for case 7 and 8
 		case 9:
