@@ -10,7 +10,7 @@ Just to manage code changes etc.
 * statistics for given player by year for batting
 * statistics for given player by year for pitching
 * statistics for given player by year for fielding
-* managers, and the teams they manage
+* who managed a team in a given year
 * salary for given player
 * salary for given manager
 * basic info for given player/manager
