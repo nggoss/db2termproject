@@ -4,7 +4,7 @@
 	//Execute query chosen by the client
 	switch ($_GET["query"])
 	{
-		case 1:
+		case 1: //TODO implement cases 1-4, 14
 			executeQuery("SELECT DISTINCT name FROM teams");
 			break;
 		case 2:
@@ -57,35 +57,42 @@
 														WHERE name = '" . mysql_real_escape_string($_POST['teamName']) . "')
 										AND yearID = " . mysql_real_escape_string($_POST['year']) . ")");
 			break;
-		case 8: //The same Query can be used for case 7 and 8
-		case 9:
+		case 8:
 			executeQuery("SELECT salary
 				     FROM salaries
-				     WHERE playerID = '" .  mysql_real_escape_string($_GET['playerID']) . "'");
+				     WHERE playerID =(SELECT DISTINCT playerID FROM master WHERE
+								nameFirst = '" . mysql_real_escape_string($_POST['firstName']) . "' 
+								AND nameLast = '" . mysql_real_escape_string($_POST['lastName']) . "')
+							AND yearID = " . mysql_real_escape_string($_POST['year']));
 			break;
-		case 10:
-			executeQuery("SELECT teamID FROM teams");
-			break;
-		case 11:
+		case 9:
 			executeQuery("SELECT name_full
 				     FROM schools, collegeplaying
-				     WHERE collegeplaying.schoolID = schools.schoolID AND collegeplaying.playerID = '" . $_GET['playerID'] . "'");
+				     WHERE collegeplaying.schoolID = schools.schoolID
+					 AND collegeplaying.playerID = (SELECT DISTINCT playerID FROM master WHERE
+								nameFirst = '" . mysql_real_escape_string($_POST['firstName']) . "' 
+								AND nameLast = '" . mysql_real_escape_string($_POST['lastName']) . "')");
+			break;
+		case 10:
+			executeQuery("SELECT awardID, nameFirst, nameLast
+						FROM master, awardsplayers
+						WHERE master.playerID = awardsplayers.playerID
+						AND yearID = " . mysql_real_escape_string($_POST['year']));
+			break;
+		case 11:
+			executeQuery("SELECT yearID, awardID FROM awardsplayers
+						WHERE playerID = (SELECT DISTINCT playerID FROM master WHERE
+								nameFirst = '" . mysql_real_escape_string($_POST['firstName']) . "' 
+								AND nameLast = '" . mysql_real_escape_string($_POST['lastName']) . "')");
 			break;
 		case 12:
-			executeQuery("SELECT awardID
-				     FROM awardsplayers
-				     WHERE yearID = " . mysql_real_escape_string($_GET['yearID']));
-			break;
-		case 13:
-			executeQuery("SELECT awardID
-				     FROM awardsplayers
-				     WHERE playerID = '" . mysql_real_escape_string($_GET['playerID']) . "'");
-			break;
-		case 14:
-			executeQuery("SELECT DISTINCT playerID, awardID FROM awardsplayers");
+			executeQuery("SELECT nameFirst, nameLast
+						FROM master
+						WHERE playerID IN (SELECT DISTINCT playerID FROM awardsplayers
+											WHERE awardID = '" . mysql_real_escape_string($_POST['awardID']) . "')");
 
 			break;
-		case 15://TODO finish query 15
+		case 13://TODO finish query 13
 			executeQuery("SELECT teamID FROM teams");
 			break;
 		default:
