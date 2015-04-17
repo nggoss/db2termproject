@@ -1,10 +1,11 @@
 <?php
-   $result;
+	require_once('DataBaseLogin.php');
+	$result;
 
 	//Execute query chosen by the client
 	switch ($_GET["query"])
 	{
-		case 1: //TODO implement cases 1-4, 14
+		case 1: 
 			executeQuery("SELECT DISTINCT name FROM teams");
 			break;
 		case 2:
@@ -23,13 +24,16 @@
 		case 3:
 			//Get player's basic info
 			//Input: firstName, lastName
-			//Output: 
+			//Output: basic info
 			executeQuery("SELECT * FROM master
 							WHERE playerID = (SELECT DISTINCT playerID FROM master WHERE
 										  nameFirst = '" . mysql_real_escape_string($_POST['firstName']) . "' 
 										  AND nameLast = '" . mysql_real_escape_string($_POST['lastName']) . "')");
 			break;
 		case 4:
+			//Get batting statistics
+			//Input: firstName, lastName, year
+			//Output: batting stats
 			executeQuery("SELECT * FROM batting WHERE
 						playerID =(SELECT DISTINCT playerID FROM master WHERE
 								nameFirst = '" . mysql_real_escape_string($_POST['firstName']) . "' 
@@ -37,6 +41,9 @@
 						AND yearID = '" . mysql_real_escape_string($_POST['year']) . "'");
 			break;
 		case 5:
+			//Get pitching statistics
+			//Input: firstName, lastName, year
+			//Output: pitching stats
 			executeQuery("SELECT * FROM pitching WHERE
 						playerID =(SELECT DISTINCT playerID FROM master WHERE
 								nameFirst = '" . mysql_real_escape_string($_POST['firstName']) . "' 
@@ -44,6 +51,9 @@
 						AND yearID = '" . mysql_real_escape_string($_POST['year']) . "'");
 			break;
 		case 6:
+			//Get fielding statistics
+			//Input: firstName, lastName, year
+			//Output: fielding stats
 			executeQuery("SELECT * FROM fielding WHERE
 						playerID =(SELECT DISTINCT playerID FROM master WHERE
 								nameFirst = '" . mysql_real_escape_string($_POST['firstName']) . "' 
@@ -51,6 +61,9 @@
 						AND yearID = '" . mysql_real_escape_string($_POST['year']) . "'");
 			break;
 		case 7:
+			//Get manager for team
+			//Input: teamID, year
+			//Output: firstName, lastName
 			executeQuery("SELECT nameFirst, nameLast FROM master
 						WHERE playerID = (SELECT DISTINCT playerID FROM managers
 										WHERE teamID = (SELECT DISTINCT teamID from teams
@@ -58,6 +71,9 @@
 										AND yearID = " . mysql_real_escape_string($_POST['year']) . ")");
 			break;
 		case 8:
+			//Get salary
+			//Input: firstName, lastName, year
+			//Output: salary
 			executeQuery("SELECT salary
 				     FROM salaries
 				     WHERE playerID =(SELECT DISTINCT playerID FROM master WHERE
@@ -66,6 +82,9 @@
 							AND yearID = " . mysql_real_escape_string($_POST['year']));
 			break;
 		case 9:
+			//Get school
+			//Input: firstName, lastName
+			//Output: schoolID
 			executeQuery("SELECT name_full
 				     FROM schools, collegeplaying
 				     WHERE collegeplaying.schoolID = schools.schoolID
@@ -74,26 +93,32 @@
 								AND nameLast = '" . mysql_real_escape_string($_POST['lastName']) . "')");
 			break;
 		case 10:
+			//Get awards given
+			//Input: year
+			//Output: awardID, firstName, lastName
 			executeQuery("SELECT awardID, nameFirst, nameLast
 						FROM master, awardsplayers
 						WHERE master.playerID = awardsplayers.playerID
 						AND yearID = " . mysql_real_escape_string($_POST['year']));
 			break;
 		case 11:
+			//Get awards for specific player
+			//Input: firstName, lastName
+			//Output: awardID, year
 			executeQuery("SELECT yearID, awardID FROM awardsplayers
 						WHERE playerID = (SELECT DISTINCT playerID FROM master WHERE
 								nameFirst = '" . mysql_real_escape_string($_POST['firstName']) . "' 
 								AND nameLast = '" . mysql_real_escape_string($_POST['lastName']) . "')");
 			break;
 		case 12:
+			//Get all players an award has been given to
+			//Input: awardID
+			//Output: firstName, lastName
 			executeQuery("SELECT nameFirst, nameLast
 						FROM master
 						WHERE playerID IN (SELECT DISTINCT playerID FROM awardsplayers
 											WHERE awardID = '" . mysql_real_escape_string($_POST['awardID']) . "')");
 
-			break;
-		case 13://TODO finish query 13
-			executeQuery("SELECT teamID FROM teams");
 			break;
 		default:
 			exit('That Query is not supported');

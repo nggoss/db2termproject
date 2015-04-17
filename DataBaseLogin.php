@@ -1,14 +1,20 @@
 <?php
+        session_start();
+
+        if(!isset($_SESSION['user']))
+        {
+            $_SESSION['user'] = $_POST["username"];
+            $_SESSION['password'] = $_POST["password"];
+        }
+
 	//create Database connection with given user name and password
-	
-	$myconnection = mysql_connect('localhost', $_POST["username"], $_POST["password"]) or failedLogin();
+	$myconnection = mysql_pconnect('localhost', $_SESSION['user'], $_SESSION['password']) or endSession();
 	//Select Database
 	$mydb = mysql_select_db ('project_database') or die ('Could not select database');
         
-        header("Location: http://localhost/queriesUI.html");
-        
-        function failedLogin()
+        function endSession()
         {
-            header("Location: http://localhost");
-	}
+            session_destroy();
+            die('invalid login');
+        }
 ?>

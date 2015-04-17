@@ -16,4 +16,3 @@ Just to manage code changes etc.
 * awards for given year
 * awards for given player
 * players who have received a given award
-* get teams playing for given game

@@ -1,4 +1,4 @@
 <?php
-        //close database connections
-	mysql_close($myconnection); 
+        session_start();
+        session_unset();
 ?>
