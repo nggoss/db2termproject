@@ -102,7 +102,7 @@ public class HTTPConnection
 	}
 	
 	/**Params userName, password for logging into the database
-	 * Returns response code from server
+	 * Returns response code from server, -1 if login failed
 	 * **/
 	public int loginToServer(String userName, String password) throws Exception
 	{
@@ -122,13 +122,22 @@ public class HTTPConnection
 		
 		int code = connection.getResponseCode();
 		
-		//System.out.println(new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine());
-		
-		connection.disconnect();
-		
+		BufferedReader inputStreamBufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+		String line;
+		while ((line = inputStreamBufferedReader.readLine()) != null)
+		{	
+			//if login fails
+			if(line.indexOf("invalid login") != -1)
+			{
+				return -1;
+			}
+		}
+			
 		//Save user session
 		this.userName = userName;
 		this.password = password;
+		
+		connection.disconnect();
 		
 		return code;
 	}
@@ -152,7 +161,7 @@ public class HTTPConnection
 		
 		//Get response from server
 		while ((line = inputStreamBufferedReader.readLine()) != null)
-		{
+		{	
 			results.append(line);				
 		}
 		inputStreamBufferedReader.close();

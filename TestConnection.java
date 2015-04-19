@@ -10,13 +10,15 @@ public class TestConnection
 		
 		try
 		{
-			System.out.println(connection.loginToServer("root", ""));
-			
-			ArrayList<String> s = connection.executeQuery(1, "David", "Aardsma", "2004", null, null);
-		
-			System.out.println(s);
-			
-			connection.logoutFromServer();
+			//if login fails -1 is returned
+			if(connection.loginToServer("root", "") != -1)
+			{
+				ArrayList<String> s = connection.executeQuery(1, "David", "Aardsma", "2004", null, null);
+				
+				System.out.println(s);
+				
+				connection.logoutFromServer();
+			}
 		} 
 		catch (Exception e)
 		{
