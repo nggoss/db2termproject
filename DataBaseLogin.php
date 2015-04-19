@@ -1,7 +1,7 @@
 <?php
         session_start();
 
-        if(!isset($_SESSION['user']))
+        if($_SESSION['user'] == null || isset($_POST['username']))
         {
             $_SESSION['user'] = $_POST["username"];
             $_SESSION['password'] = $_POST["password"];
@@ -15,6 +15,7 @@
         function endSession()
         {
             session_destroy();
+            echo "invalid login";
             die('invalid login');
         }
 ?>
