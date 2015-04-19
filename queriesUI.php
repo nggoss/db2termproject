@@ -8,8 +8,8 @@
 <body>
 <h3>
 Query 1: Get a list of the teams
-<form method="post" action="queries.php/?query=1">
-	<input type="submit" value="Get team names" target="_blank">
+<form method="post" action="queries.php/?query=1" target="_blank">
+	<input type="submit" value="Get team names">
 </form> 
 </h3>
 
