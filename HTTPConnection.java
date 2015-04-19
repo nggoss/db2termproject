@@ -17,8 +17,8 @@ public class HTTPConnection
 	//Query results
 	ArrayList<String> resultList = new ArrayList<>();
 	//Current user credentials
-	private String userName;
-	private String password;
+	private String userName = null;
+	private String password = null;
 	
 	public HTTPConnection()
 	{
@@ -106,6 +106,9 @@ public class HTTPConnection
 	 * **/
 	public int loginToServer(String userName, String password) throws Exception
 	{
+		if(userName == null || password == null)
+			throw new Exception("Null UserName or Password");
+		
 		URL url = new URL("http://" + host + "/DataBaseLogin.php");
 		connection = (HttpURLConnection) url.openConnection();
 		
@@ -131,23 +134,13 @@ public class HTTPConnection
 	}
 	
 	/**
-	 * Close current users session on server
-	 * Returns response code from server
+	 * Clears Current User Session
 	 * **/
-	public int logoutFromServer() throws Exception
+	public void logoutFromServer() throws Exception
 	{
-		URL url = new URL("http://" + host + "/DataBaseLogout.php");
-		connection = (HttpURLConnection) url.openConnection();
-		//Any method can be used here logout uses no client information
-		connection.setRequestMethod("GET");
-		
-		int code = connection.getResponseCode();
-		connection.disconnect();
 		//remove user session
-		this.userName = "";
-		this.password = "";
-		
-		return code;
+		this.userName = null;
+		this.password = null;
 	}
 	
 	private void readResultsFromServer() throws IOException

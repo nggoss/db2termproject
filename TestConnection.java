@@ -16,7 +16,7 @@ public class TestConnection
 		
 			System.out.println(s);
 			
-			System.out.println(connection.logoutFromServer());
+			connection.logoutFromServer();
 		} 
 		catch (Exception e)
 		{
