@@ -350,7 +350,7 @@ public class MainActivity extends ListActivity {
                 }catch(Exception e) {
                     e.printStackTrace();
                 }
-                intent.putExtra("query_results", results);
+                startActivity(intent);
             }
         });
 
