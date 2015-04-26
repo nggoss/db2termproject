@@ -370,7 +370,7 @@ public class MainActivity extends ListActivity {
                         mPassword = passView.getText().toString();
                         EditText urlView = (EditText) dialogView.findViewById(R.id.url);
                         mConnectionURL = urlView.getText().toString();
-
+                        mConnection.setHost(mConnectionURL);
                         try {
                             if (mConnection.loginToServer(mUsername, mPassword) != -1) {
                                 //assumes localhost
