@@ -13,6 +13,13 @@ public class ResultActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ArrayList<String> results = new ArrayList<String>();
+
+        results = getIntent().getStringArrayListExtra("results");
+
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this,
+                R.layout.row_layout, R.id.listText, results);
+        setListAdapter(myAdapter);
 
     }
 
