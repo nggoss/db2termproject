@@ -95,7 +95,7 @@ public class MainActivity extends ListActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //execute that query
                 LayoutInflater inflater = getLayoutInflater();
-                View dialogLayout;
+                final View dialogLayout;
                 AlertDialog dialog;
                 block = true;
 
@@ -123,11 +123,11 @@ public class MainActivity extends ListActivity {
                                             EditText yearView;
 
                                             //Get the input strings
-                                            firstNameView = (EditText) findViewById(R.id.query2_firstName);
+                                            firstNameView = (EditText) dialogLayout.findViewById(R.id.query2_firstName);
                                             firstName = firstNameView.getText().toString();
-                                            lastNameView = (EditText) findViewById(R.id.query2_lastName);
+                                            lastNameView = (EditText) dialogLayout.findViewById(R.id.query2_lastName);
                                             lastName = lastNameView.getText().toString();
-                                            yearView = (EditText) findViewById(R.id.query2_year);
+                                            yearView = (EditText) dialogLayout.findViewById(R.id.query2_year);
                                             year = yearView.getText().toString();
                                             block = false;
                                         }
@@ -149,9 +149,9 @@ public class MainActivity extends ListActivity {
                                             EditText lastNameView;
 
                                             //Get the input strings
-                                            firstNameView = (EditText) findViewById(R.id.query3_firstName);
+                                            firstNameView = (EditText) dialogLayout.findViewById(R.id.query3_firstName);
                                             firstName = firstNameView.getText().toString();
-                                            lastNameView = (EditText) findViewById(R.id.query3_lastName);
+                                            lastNameView = (EditText) dialogLayout.findViewById(R.id.query3_lastName);
                                             lastName = lastNameView.getText().toString();
                                             block = false;
                                         }
@@ -174,11 +174,11 @@ public class MainActivity extends ListActivity {
                                             EditText yearView;
 
                                             //Get the input strings
-                                            firstNameView = (EditText) findViewById(R.id.query4_firstName);
+                                            firstNameView = (EditText) dialogLayout.findViewById(R.id.query4_firstName);
                                             firstName = firstNameView.getText().toString();
-                                            lastNameView = (EditText) findViewById(R.id.query4_lastName);
+                                            lastNameView = (EditText) dialogLayout.findViewById(R.id.query4_lastName);
                                             lastName = lastNameView.getText().toString();
-                                            yearView = (EditText) findViewById(R.id.query4_year);
+                                            yearView = (EditText) dialogLayout.findViewById(R.id.query4_year);
                                             year = yearView.getText().toString();
                                             block = false;
                                         }
@@ -201,11 +201,11 @@ public class MainActivity extends ListActivity {
                                             EditText yearView;
 
                                             //Get the input strings
-                                            firstNameView = (EditText) findViewById(R.id.query5_firstName);
+                                            firstNameView = (EditText) dialogLayout.findViewById(R.id.query5_firstName);
                                             firstName = firstNameView.getText().toString();
-                                            lastNameView = (EditText) findViewById(R.id.query5_lastName);
+                                            lastNameView = (EditText) dialogLayout.findViewById(R.id.query5_lastName);
                                             lastName = lastNameView.getText().toString();
-                                            yearView = (EditText) findViewById(R.id.query5_year);
+                                            yearView = (EditText) dialogLayout.findViewById(R.id.query5_year);
                                             year = yearView.getText().toString();
                                             block = false;
                                         }
@@ -228,11 +228,11 @@ public class MainActivity extends ListActivity {
                                             EditText yearView;
 
                                             //Get the input strings
-                                            firstNameView = (EditText) findViewById(R.id.query6_firstName);
+                                            firstNameView = (EditText) dialogLayout.findViewById(R.id.query6_firstName);
                                             firstName = firstNameView.getText().toString();
-                                            lastNameView = (EditText) findViewById(R.id.query6_lastName);
+                                            lastNameView = (EditText) dialogLayout.findViewById(R.id.query6_lastName);
                                             lastName = lastNameView.getText().toString();
-                                            yearView = (EditText) findViewById(R.id.query6_year);
+                                            yearView = (EditText) dialogLayout.findViewById(R.id.query6_year);
                                             year = yearView.getText().toString();
                                             block = false;
                                         }
@@ -254,9 +254,9 @@ public class MainActivity extends ListActivity {
                                             EditText teamNameView;
 
                                             //Get the input strings
-                                            teamNameView = (EditText) findViewById(R.id.query7_teamID);
+                                            teamNameView = (EditText) dialogLayout.findViewById(R.id.query7_teamID);
                                             firstName = teamNameView.getText().toString();
-                                            yearView = (EditText) findViewById(R.id.query7_year);
+                                            yearView = (EditText) dialogLayout.findViewById(R.id.query7_year);
                                             year = yearView.getText().toString();
                                             block = false;
                                         }
@@ -279,11 +279,11 @@ public class MainActivity extends ListActivity {
                                             EditText yearView;
 
                                             //Get the input strings
-                                            firstNameView = (EditText) findViewById(R.id.query8_firstName);
+                                            firstNameView = (EditText) dialogLayout.findViewById(R.id.query8_firstName);
                                             firstName = firstNameView.getText().toString();
-                                            lastNameView = (EditText) findViewById(R.id.query8_lastName);
+                                            lastNameView = (EditText) dialogLayout.findViewById(R.id.query8_lastName);
                                             lastName = lastNameView.getText().toString();
-                                            yearView = (EditText) findViewById(R.id.query8_year);
+                                            yearView = (EditText) dialogLayout.findViewById(R.id.query8_year);
                                             year = yearView.getText().toString();
                                             block = false;
                                         }
@@ -305,9 +305,9 @@ public class MainActivity extends ListActivity {
                                             EditText lastNameView;
 
                                             //Get the input strings
-                                            firstNameView = (EditText) findViewById(R.id.query9_firstName);
+                                            firstNameView = (EditText) dialogLayout.findViewById(R.id.query9_firstName);
                                             firstName = firstNameView.getText().toString();
-                                            lastNameView = (EditText) findViewById(R.id.query9_lastName);
+                                            lastNameView = (EditText) dialogLayout.findViewById(R.id.query9_lastName);
                                             lastName = lastNameView.getText().toString();
                                             block = false;
                                         }
@@ -329,7 +329,7 @@ public class MainActivity extends ListActivity {
                                             EditText yearView;
 
                                             //Get the input strings
-                                            yearView = (EditText) findViewById(R.id.query10_year);
+                                            yearView = (EditText) dialogLayout.findViewById(R.id.query10_year);
                                             year = yearView.getText().toString();
                                             block = false;
                                         }
@@ -351,9 +351,9 @@ public class MainActivity extends ListActivity {
                                             EditText lastNameView;
 
                                             //Get the input strings
-                                            firstNameView = (EditText) findViewById(R.id.query11_firstName);
+                                            firstNameView = (EditText) dialogLayout.findViewById(R.id.query11_firstName);
                                             firstName = firstNameView.getText().toString();
-                                            lastNameView = (EditText) findViewById(R.id.query11_lastName);
+                                            lastNameView = (EditText) dialogLayout.findViewById(R.id.query11_lastName);
                                             lastName = lastNameView.getText().toString();
                                             block = false;
                                         }
@@ -361,8 +361,8 @@ public class MainActivity extends ListActivity {
                                     .show();
                             //Get the input strings
                             //execute the query
-                            results = mConnection.executeQuery(11, firstName, lastName, null, null, null);
-                            new HTTPTask().execute("6", firstName, lastName, year, null, null);
+                            
+                            new HTTPTask().execute("11", firstName, lastName, null, null, null);
                             break;
                         case 12:
                             //Display the input dialog
@@ -374,7 +374,7 @@ public class MainActivity extends ListActivity {
                                         public void onClick(DialogInterface dialog, int which) {
                                             EditText awardIDView;
                                             //Get the input strings
-                                            awardIDView = (EditText) findViewById(R.id.query12_awardID);
+                                            awardIDView = (EditText) dialogLayout.findViewById(R.id.query12_awardID);
                                             year = awardIDView.getText().toString();
                                             block = false;
                                         }
