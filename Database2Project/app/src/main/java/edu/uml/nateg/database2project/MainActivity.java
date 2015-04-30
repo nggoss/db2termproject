@@ -4,7 +4,7 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,7 +26,9 @@ public class MainActivity extends ListActivity {
     String mConnectionURL = "";
     HTTPConnection mConnection = new HTTPConnection();
     boolean connected = false;
+    boolean block = false;
 
+    ArrayList<String> results = new ArrayList<String>();
     ArrayList<String> queries = new ArrayList<String>();
 
     String firstName = "";
@@ -34,6 +36,32 @@ public class MainActivity extends ListActivity {
     String year = "";
     String teamName = "";
     String awardID = "";
+
+    private class HTTPTask extends AsyncTask<String, String, ArrayList<String>>
+    {
+        protected ArrayList<String> doInBackground(String... data)
+        {
+            try
+            {
+                while (block) {} //let user input data
+                return mConnection.executeQuery(Integer.parseInt(data[0]), data[1], data[2], data[3], data[4], data[5]);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<String> results)
+        {
+            Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+            intent.putExtra("results", results);
+            startActivity(intent);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,12 +94,10 @@ public class MainActivity extends ListActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //execute that query
-                Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
-                ArrayList<String> results = new ArrayList<String>();
                 LayoutInflater inflater = getLayoutInflater();
                 View dialogLayout;
                 AlertDialog dialog;
-
+                block = true;
 
                 try{
                     switch(position)
@@ -81,7 +107,8 @@ public class MainActivity extends ListActivity {
                             //      no dialog for this one
                             //Get the input strings
                             //execute the query
-                            results = mConnection.executeQuery(1, null, null, null, null, null);
+                            block = false;
+                            new HTTPTask().execute("1", null, null, null, null, null);
                             break;
                         case 2:
                             //Display the input dialog
@@ -102,12 +129,13 @@ public class MainActivity extends ListActivity {
                                             lastName = lastNameView.getText().toString();
                                             yearView = (EditText) findViewById(R.id.query2_year);
                                             year = yearView.getText().toString();
+                                            block = false;
                                         }
                                     })
                                     .show();
 
                             //execute the query
-                            results = mConnection.executeQuery(2, firstName, lastName, year, null, null);
+                            new HTTPTask().execute("2", firstName, lastName, year, null, null);
                             break;
                         case 3:
                             //Display the input dialog
@@ -125,12 +153,13 @@ public class MainActivity extends ListActivity {
                                             firstName = firstNameView.getText().toString();
                                             lastNameView = (EditText) findViewById(R.id.query3_lastName);
                                             lastName = lastNameView.getText().toString();
+                                            block = false;
                                         }
                                     })
                                     .show();
                             //Get the input strings
                             //execute the query
-                            results = mConnection.executeQuery(3, firstName, lastName, null, null, null);
+                            new HTTPTask().execute("3", firstName, lastName, null, null, null);
                             break;
                         case 4:
                             //Display the input dialog
@@ -151,12 +180,13 @@ public class MainActivity extends ListActivity {
                                             lastName = lastNameView.getText().toString();
                                             yearView = (EditText) findViewById(R.id.query4_year);
                                             year = yearView.getText().toString();
+                                            block = false;
                                         }
                                     })
                                     .show();
                             //Get the input strings
                             //execute the query
-                            results = mConnection.executeQuery(4, firstName, lastName, year, null, null);
+                            new HTTPTask().execute("4", firstName, lastName, year, null, null);
                             break;
                         case 5:
                             //Display the input dialog
@@ -177,12 +207,13 @@ public class MainActivity extends ListActivity {
                                             lastName = lastNameView.getText().toString();
                                             yearView = (EditText) findViewById(R.id.query5_year);
                                             year = yearView.getText().toString();
+                                            block = false;
                                         }
                                     })
                                     .show();
                             //Get the input strings
                             //execute the query
-                            results = mConnection.executeQuery(5, firstName, lastName, year, null, null);
+                            new HTTPTask().execute("5", firstName, lastName, year, null, null);
                             break;
                         case 6:
                             //Display the input dialog
@@ -203,12 +234,13 @@ public class MainActivity extends ListActivity {
                                             lastName = lastNameView.getText().toString();
                                             yearView = (EditText) findViewById(R.id.query6_year);
                                             year = yearView.getText().toString();
+                                            block = false;
                                         }
                                     })
                                     .show();
                             //Get the input strings
                             //execute the query
-                            results = mConnection.executeQuery(6, firstName, lastName, year, null, null);
+                            new HTTPTask().execute("6", firstName, lastName, year, null, null);
                             break;
                         case 7:
                             //Display the input dialog
@@ -226,12 +258,13 @@ public class MainActivity extends ListActivity {
                                             firstName = teamNameView.getText().toString();
                                             yearView = (EditText) findViewById(R.id.query7_year);
                                             year = yearView.getText().toString();
+                                            block = false;
                                         }
                                     })
                                     .show();
                             //Get the input strings
                             //execute the query
-                            results = mConnection.executeQuery(7, null, null, year, teamName, null);
+                            new HTTPTask().execute("7", null, null, year, teamName, null);
                             break;
                         case 8:
                             //Display the input dialog
@@ -252,12 +285,13 @@ public class MainActivity extends ListActivity {
                                             lastName = lastNameView.getText().toString();
                                             yearView = (EditText) findViewById(R.id.query8_year);
                                             year = yearView.getText().toString();
+                                            block = false;
                                         }
                                     })
                                     .show();
                             //Get the input strings
                             //execute the query
-                            results = mConnection.executeQuery(8, firstName, lastName, year, null, null);
+                            new HTTPTask().execute("8", firstName, lastName, year, null, null);
                             break;
                         case 9:
                             //Display the input dialog
@@ -275,12 +309,13 @@ public class MainActivity extends ListActivity {
                                             firstName = firstNameView.getText().toString();
                                             lastNameView = (EditText) findViewById(R.id.query9_lastName);
                                             lastName = lastNameView.getText().toString();
+                                            block = false;
                                         }
                                     })
                                     .show();
                             //Get the input strings
                             //execute the query
-                            results = mConnection.executeQuery(9, firstName, lastName, null, null, null);
+                            new HTTPTask().execute("9", firstName, lastName, null, null, null);
                             break;
                         case 10:
                             //Display the input dialog
@@ -296,12 +331,13 @@ public class MainActivity extends ListActivity {
                                             //Get the input strings
                                             yearView = (EditText) findViewById(R.id.query10_year);
                                             year = yearView.getText().toString();
+                                            block = false;
                                         }
                                     })
                                     .show();
                             //Get the input strings
                             //execute the query
-                            results = mConnection.executeQuery(10, null, null, year, null, null);
+                            new HTTPTask().execute("10", null, null, year, null, null);
                             break;
                         case 11:
                             //Display the input dialog
@@ -319,12 +355,14 @@ public class MainActivity extends ListActivity {
                                             firstName = firstNameView.getText().toString();
                                             lastNameView = (EditText) findViewById(R.id.query11_lastName);
                                             lastName = lastNameView.getText().toString();
+                                            block = false;
                                         }
                                     })
                                     .show();
                             //Get the input strings
                             //execute the query
                             results = mConnection.executeQuery(11, firstName, lastName, null, null, null);
+                            new HTTPTask().execute("6", firstName, lastName, year, null, null);
                             break;
                         case 12:
                             //Display the input dialog
@@ -338,19 +376,19 @@ public class MainActivity extends ListActivity {
                                             //Get the input strings
                                             awardIDView = (EditText) findViewById(R.id.query12_awardID);
                                             year = awardIDView.getText().toString();
+                                            block = false;
                                         }
                                     })
                                     .show();
                             //Get the input strings
                             //execute the query
-                            results = mConnection.executeQuery(12, null, null, null, null, awardID);
+                            new HTTPTask().execute("12", null, null, null, null, awardID);
                             break;
                     }
-                    intent.putExtra("results", results);
+
                 }catch(Exception e) {
                     e.printStackTrace();
                 }
-                startActivity(intent);
             }
         });
 
@@ -360,9 +398,11 @@ public class MainActivity extends ListActivity {
         LayoutInflater inflater = MainActivity.this.getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.login_dialog, null);
         builder.setView(dialogView)
-                .setPositiveButton(R.string.sign_in, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.sign_in, new DialogInterface.OnClickListener()
+                {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface dialog, int which)
+                    {
                         //sign in
                         EditText userView = (EditText) dialogView.findViewById(R.id.username);
                         mUsername = userView.getText().toString();
@@ -371,19 +411,32 @@ public class MainActivity extends ListActivity {
                         EditText urlView = (EditText) dialogView.findViewById(R.id.url);
                         mConnectionURL = urlView.getText().toString();
                         mConnection.setHost(mConnectionURL);
-                        try {
-                            if (mConnection.loginToServer(mUsername, mPassword) != -1) {
-                                //assumes localhost
-                                connected = true;
+
+                        new Thread()
+                        {
+                            public void run()
+                            {
+                                try
+                                {
+                                    if (mConnection.loginToServer(mUsername, mPassword) != -1)
+                                    {
+                                        //assumes localhost
+                                        connected = true;
+                                    }
+                                }
+                                catch (Exception e)
+                                {
+                                    e.printStackTrace();
+                                }
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                        }.start();
                     }
                 })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener()
+                {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface dialog, int which)
+                    {
                         //cancel
                     }
                 });

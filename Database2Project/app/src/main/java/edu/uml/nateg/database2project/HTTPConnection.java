@@ -1,5 +1,7 @@
 package edu.uml.nateg.database2project;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -101,6 +103,7 @@ public class HTTPConnection
         }
 
         connection.disconnect();
+
         return resultList;
     }
 
